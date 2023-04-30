@@ -1,5 +1,6 @@
 package com.blog.blogapi.users;
 import com.blog.blogapi.dtos.CreateUserDTO;
+import com.blog.blogapi.security.jwt.JWTService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -20,7 +21,8 @@ public class UserServiceTest {
         if(userService==null){
             var modelMapper =new ModelMapper();
             var passwordEncoder=new BCryptPasswordEncoder();
-            userService=new UserService(userRepository,modelMapper, passwordEncoder);
+            var jwtService=new JWTService();
+            userService=new UserService(userRepository,modelMapper, passwordEncoder, jwtService);
         }
         return userService;
     }

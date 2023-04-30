@@ -19,11 +19,11 @@ import java.util.List;
 @NoArgsConstructor
 public class UserEntity extends BaseEntity {
 
+    Integer id;
     String username;
     String password;
     String email;
-    String bio;
-    String image;
+
 
     @ManyToMany(mappedBy = "likedBy")
     List<ArticleEntity> likedArticles;
@@ -38,4 +38,5 @@ public class UserEntity extends BaseEntity {
 
     @ManyToMany(mappedBy = "following")
     List<UserEntity> followers;
+
 }

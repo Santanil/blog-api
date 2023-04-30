@@ -3,6 +3,7 @@ package com.blog.blogapi.users;
 import com.blog.blogapi.dtos.CreateUserDTO;
 import com.blog.blogapi.dtos.LoginUserDTO;
 import com.blog.blogapi.dtos.UserResponseDTO;
+import com.blog.blogapi.security.jwt.JWTService;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -12,11 +13,12 @@ public class UserService {
     private final UserRepository userRepository;
     private final ModelMapper modelMapper;
     private final PasswordEncoder passwordEncoder;
-
-    public UserService(UserRepository userRepository, ModelMapper modelMapper, PasswordEncoder passwordEncoder) {
+    private final JWTService jwtService;
+    public UserService(UserRepository userRepository, ModelMapper modelMapper, PasswordEncoder passwordEncoder, JWTService jwtService) {
         this.userRepository = userRepository;
         this.modelMapper = modelMapper;
         this.passwordEncoder = passwordEncoder;
+        this.jwtService = jwtService;
     }
 
     public UserResponseDTO createUser(CreateUserDTO createUserDTO){
@@ -26,6 +28,8 @@ public class UserService {
         newUserEntity.setPassword(passwordEncoder.encode(createUserDTO.getPassword()));
         var savedUser=userRepository.save(newUserEntity);
         var userResponseDTO=modelMapper.map(savedUser,UserResponseDTO.class);
+        //send the token to the client after successful user creation
+        userResponseDTO.setToken(jwtService.createJWTtoken(savedUser.getId()));
         return userResponseDTO;
     }
 
@@ -40,6 +44,8 @@ public class UserService {
             throw new IncorrectPasswordException("Incorrect Password");
         }
         var userResponseDTO=modelMapper.map(userEntity,UserResponseDTO.class);
+        //send the token to the client after successful login
+        userResponseDTO.setToken(jwtService.createJWTtoken(userEntity.getId()));
         return userResponseDTO;
     }
 

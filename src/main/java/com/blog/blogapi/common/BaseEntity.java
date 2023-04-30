@@ -19,4 +19,5 @@ public class BaseEntity {
     @CreatedDate()
     @Column(name="created_at", updatable = false)
     Date createdAt;
+
 }
