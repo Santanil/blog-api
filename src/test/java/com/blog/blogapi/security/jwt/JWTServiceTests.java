@@ -9,7 +9,7 @@ public class JWTServiceTests {
     @Test
     void canCreateJWTFromUserId(){
         var userId=1122;
-        var jwt=jwtService.createJWTtoken(userId);
+        var jwt=jwtService.createJWTToken(userId);
         Assert.assertEquals(jwt,jwt);
     }
 }

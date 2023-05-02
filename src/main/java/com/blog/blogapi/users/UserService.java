@@ -29,7 +29,7 @@ public class UserService {
         var savedUser=userRepository.save(newUserEntity);
         var userResponseDTO=modelMapper.map(savedUser,UserResponseDTO.class);
         //send the token to the client after successful user creation
-        userResponseDTO.setToken(jwtService.createJWTtoken(savedUser.getId()));
+        userResponseDTO.setToken(jwtService.createJWTToken(savedUser.getId()));
         return userResponseDTO;
     }
 
@@ -45,7 +45,7 @@ public class UserService {
         }
         var userResponseDTO=modelMapper.map(userEntity,UserResponseDTO.class);
         //send the token to the client after successful login
-        userResponseDTO.setToken(jwtService.createJWTtoken(userEntity.getId()));
+        userResponseDTO.setToken(jwtService.createJWTToken(userEntity.getId()));
         return userResponseDTO;
     }
 

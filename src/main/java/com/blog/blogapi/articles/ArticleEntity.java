@@ -2,8 +2,8 @@ package com.blog.blogapi.articles;
 
 import com.blog.blogapi.common.BaseEntity;
 import com.blog.blogapi.users.UserEntity;
-import jakarta.persistence.*;
 
+import javax.persistence.*;
 import java.util.List;
 
 @Entity(name="articles")
@@ -19,6 +19,8 @@ public class ArticleEntity extends BaseEntity {
     @Column(nullable = false, length = 8000)
     String body;
 
+    @ManyToOne
+    UserEntity author;
 
     @ManyToMany
     @JoinTable(

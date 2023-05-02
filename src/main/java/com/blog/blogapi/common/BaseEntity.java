@@ -1,12 +1,10 @@
 package com.blog.blogapi.common;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.MappedSuperclass;
+
 import org.springframework.data.annotation.CreatedDate;
 
-import jakarta.persistence.Id;
+
+import javax.persistence.*;
 import java.util.Date;
 
 @MappedSuperclass

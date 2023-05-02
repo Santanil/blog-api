@@ -2,15 +2,16 @@ package com.blog.blogapi.users;
 
 import com.blog.blogapi.articles.ArticleEntity;
 import com.blog.blogapi.common.BaseEntity;
-import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToMany;
 
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import java.util.List;
 
 @Entity(name="users")

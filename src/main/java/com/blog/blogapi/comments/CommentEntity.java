@@ -3,9 +3,11 @@ package com.blog.blogapi.comments;
 import com.blog.blogapi.articles.ArticleEntity;
 import com.blog.blogapi.common.BaseEntity;
 import com.blog.blogapi.users.UserEntity;
-import jakarta.persistence.Column;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Entity;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+
 
 @Entity(name="comments")
 public class CommentEntity extends BaseEntity {
