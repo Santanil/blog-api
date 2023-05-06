@@ -56,7 +56,7 @@ public class UserService {
                 userResponseDTO.setToken(jwtService.createJWTToken(userEntity.getId()));
                 break;
             case AUTH_TOKEN:
-                userResponseDTO.setToken(authTokenService.createAuthToken(userEntity).toString());
+                userResponseDTO.setToken( authTokenService.createAuthToken(userEntity).toString());
                 break;
         }
         return userResponseDTO;

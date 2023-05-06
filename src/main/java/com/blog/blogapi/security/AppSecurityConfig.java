@@ -1,5 +1,7 @@
 package com.blog.blogapi.security;
 
+import com.blog.blogapi.security.authtokens.AuthTokenFilter;
+import com.blog.blogapi.security.authtokens.AuthTokenService;
 import com.blog.blogapi.security.jwt.JWTAuthenticationFilter;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -11,7 +13,11 @@ import org.springframework.security.web.authentication.AnonymousAuthenticationFi
 
 @EnableWebSecurity
 public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
+    private final AuthTokenService authTokenService;
 
+    public AppSecurityConfig(AuthTokenService authTokenService){
+        this.authTokenService=authTokenService;
+    }
 
     protected void configure(HttpSecurity http) throws Exception {
 
@@ -24,11 +30,9 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.GET,"/articles").permitAll()
                 .anyRequest().authenticated();
 
-        http
-                .addFilterBefore(new JWTAuthenticationFilter(), AnonymousAuthenticationFilter.class);
-
-        http
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+        http.addFilterBefore(new JWTAuthenticationFilter(), AnonymousAuthenticationFilter.class);
+        http.addFilterBefore(new AuthTokenFilter(authTokenService), AnonymousAuthenticationFilter.class);
+        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
     }
 }
