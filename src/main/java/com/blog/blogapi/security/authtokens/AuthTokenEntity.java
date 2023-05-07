@@ -1,14 +1,17 @@
 package com.blog.blogapi.security.authtokens;
 
 import com.blog.blogapi.users.UserEntity;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.Setter;
-import org.apache.catalina.User;
+import lombok.NoArgsConstructor;
+import lombok.Setter;;
 
 import javax.persistence.*;
 import java.util.UUID;
 
-@Entity
+@Entity(name = "auth_tokens")
+@AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @Setter
 public class AuthTokenEntity {
@@ -17,6 +20,5 @@ public class AuthTokenEntity {
     private UUID id;
 
     @ManyToOne
-    @JoinColumn(name="user_id")
     private UserEntity user;
 }
